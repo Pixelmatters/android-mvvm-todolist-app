@@ -1,5 +1,6 @@
 package com.pixelmatters.todolistapp.ui.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +23,13 @@ class HomeController : BaseController(), TodoListAdapter.Listener {
     init {
         disposable =
             viewModel.observableTodoList.observable.subscribe {
-                viewModel.todoList = it
-
+                view?.todo_list?.adapter = TodoListAdapter(it, this)
+                view?.todo_list?.addItemDecoration(
+                    DividerItemDecoration(
+                        this.activity,
+                        DividerItemDecoration.VERTICAL
+                    )
+                )
             }
     }
 
@@ -31,13 +37,16 @@ class HomeController : BaseController(), TodoListAdapter.Listener {
         val view = inflater.inflate(R.layout.controller_home, container, false)
 
         view.add_todo.setOnClickListener { pushController(AddTodoController()) }
-        view.todo_list.adapter = TodoListAdapter(viewModel.todoList,this)
+
+        view.todo_list.adapter =
+            TodoListAdapter(viewModel.observableTodoList.getValue() ?: emptyList(), this)
         view.todo_list.addItemDecoration(
             DividerItemDecoration(
                 this.activity,
                 DividerItemDecoration.VERTICAL
             )
         )
+
         return view
     }
 

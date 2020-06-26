@@ -12,14 +12,9 @@ class HomeViewModel : ViewModel() {
 
     var observableTodoList =
         ObservableList<Todo>(ArrayList())
-    var todoList: List<Todo> = emptyList()
-    var disposable: Disposable? = null
+    private var disposable: Disposable
 
     init {
-        setupEventBus()
-    }
-
-    private fun setupEventBus() {
         disposable =
             Messenger.subscribe<TodoAddMessage>()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -30,6 +25,13 @@ class HomeViewModel : ViewModel() {
 
     fun addTodo(todo: Todo) {
         observableTodoList.add(todo)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        if (!disposable.isDisposed) {
+            disposable.dispose()
+        }
     }
 
 }

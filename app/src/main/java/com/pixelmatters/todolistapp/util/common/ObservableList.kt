@@ -1,10 +1,10 @@
 package com.pixelmatters.todolistapp.util.common
 
 import io.reactivex.Observable
-import io.reactivex.subjects.ReplaySubject
+import io.reactivex.subjects.BehaviorSubject
 
 class ObservableList<T>(protected val list: MutableList<T>) {
-    protected val subject: ReplaySubject<List<T>> = ReplaySubject.create()
+    protected val subject: BehaviorSubject<List<T>> = BehaviorSubject.create()
     val observable: Observable<List<T>>
         get() = subject
 
@@ -13,8 +13,12 @@ class ObservableList<T>(protected val list: MutableList<T>) {
         subject.onNext(list)
     }
 
-    fun size(): Int {
-        return subject.values.size
+    fun size(): Int? {
+        return subject.value?.size
+    }
+
+    fun getValue(): List<T>? {
+        return subject.value
     }
 
 }
