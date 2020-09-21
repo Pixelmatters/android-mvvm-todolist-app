@@ -1,7 +1,6 @@
 package com.pixelmatters.todolistapp.ui.home
 
 import androidx.lifecycle.ViewModel
-import com.pixelmatters.todolistapp.util.common.ObservableList
 import com.pixelmatters.todolistapp.data.model.Todo
 import com.pixelmatters.todolistapp.util.messenger.Messenger
 import com.pixelmatters.todolistapp.util.messenger.TodoAddMessage
@@ -10,9 +9,8 @@ import io.reactivex.disposables.Disposable
 
 class HomeViewModel : ViewModel() {
 
-    var observableTodoList =
-        ObservableList<Todo>(ArrayList())
-    private var disposable: Disposable
+    var todoList: MutableList<Todo> = ArrayList()
+    var disposable: Disposable
 
     init {
         disposable =
@@ -24,7 +22,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun addTodo(todo: Todo) {
-        observableTodoList.add(todo)
+        todoList.add(todo)
     }
 
     override fun onCleared() {
