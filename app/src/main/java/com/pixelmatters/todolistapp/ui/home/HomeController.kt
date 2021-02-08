@@ -1,8 +1,6 @@
 package com.pixelmatters.todolistapp.ui.home
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.pixelmatters.todolistapp.R
 import com.pixelmatters.todolistapp.adapter.TodoListAdapter
@@ -20,8 +18,6 @@ class HomeController : BaseController(), TodoListAdapter.Listener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
         val view = inflater.inflate(R.layout.controller_home, container, false)
 
-        view.add_todo.setOnClickListener { pushController(AddTodoController()) }
-
         view.todo_list.adapter =
             TodoListAdapter(viewModel.todoList, this)
         view.todo_list.addItemDecoration(
@@ -31,7 +27,21 @@ class HomeController : BaseController(), TodoListAdapter.Listener {
             )
         )
 
+        setHasOptionsMenu(true)
+
         return view
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.home, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_add) {
+            pushController(AddTodoController())
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

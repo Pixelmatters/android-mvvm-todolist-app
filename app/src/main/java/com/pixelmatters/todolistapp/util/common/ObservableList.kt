@@ -3,8 +3,8 @@ package com.pixelmatters.todolistapp.util.common
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
-class ObservableList<T>(protected val list: MutableList<T>) {
-    protected val subject: BehaviorSubject<List<T>> = BehaviorSubject.create()
+class ObservableList<T>(private val list: MutableList<T>) {
+    private val subject: BehaviorSubject<List<T>> = BehaviorSubject.create()
     val observable: Observable<List<T>>
         get() = subject
 
