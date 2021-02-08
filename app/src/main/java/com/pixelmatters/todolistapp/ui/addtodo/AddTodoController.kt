@@ -61,8 +61,8 @@ class AddTodoController: BaseBackButtonController() {
 
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 
-                override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                    s?.toString()?.let { emitter.onNext(it) }
+                override fun onTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+                    charSequence?.toString()?.let { emitter.onNext(it) }
                 }
 
             }

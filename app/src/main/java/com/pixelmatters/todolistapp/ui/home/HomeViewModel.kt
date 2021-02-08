@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable
 class HomeViewModel : ViewModel() {
 
     var todoList: MutableList<Todo> = ArrayList()
-    var disposable: Disposable
+    private var disposable: Disposable
 
     init {
         disposable =
@@ -21,7 +21,7 @@ class HomeViewModel : ViewModel() {
                 }
     }
 
-    fun addTodo(todo: Todo) {
+    private fun addTodo(todo: Todo) {
         todoList.add(todo)
     }
 

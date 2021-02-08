@@ -5,11 +5,9 @@ import android.view.MenuItem
 import android.view.View
 import com.pixelmatters.todolistapp.util.extension.popCurrentController
 
-abstract class BaseBackButtonController : BaseController {
+abstract class BaseBackButtonController() : BaseController() {
 
     protected open val isSetBackButton = true
-
-    constructor()
 
     init {
         retainViewMode = RetainViewMode.RETAIN_DETACH

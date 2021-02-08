@@ -1,6 +1,5 @@
 package com.pixelmatters.todolistapp.ui.base
 
-import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
